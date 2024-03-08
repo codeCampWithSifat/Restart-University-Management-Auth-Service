@@ -1,2 +1,4 @@
-export HUSKY=0 # Disables all Git hooks
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
 yarn lint-staged
