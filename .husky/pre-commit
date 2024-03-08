@@ -1,3 +1,4 @@
-HUSKY=0
+HUSKY=0 git ... # Temporarily disables all Git hooks
 
 yarn lint-staged
+unset 
