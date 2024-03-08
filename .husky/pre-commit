@@ -1,2 +1,3 @@
 HUSKY=0
-yarn lint:check
+
+yarn lint-staged

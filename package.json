@@ -9,15 +9,20 @@
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts",
     "lint:fix": "eslint --fix",
     "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint-prettier": "yarn lint:check && yarn prettier:check"
   },
   "author": "Sifat Sayed",
   "license": "ISC",
+  "lint-staged": {
+    "src/**/*.ts" : "yarn lint-prettier"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.2"
