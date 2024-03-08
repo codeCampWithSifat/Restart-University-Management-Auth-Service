@@ -1,4 +1,3 @@
-HUSKY=0 git ... # Temporarily disables all Git hooks
-
+export HUSKY=0 # Disables all Git hooks
 yarn lint-staged
 unset 
