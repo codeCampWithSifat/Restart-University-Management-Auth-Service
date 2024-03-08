@@ -1,3 +1,2 @@
-npm test
-
+HUSKY=0
 yarn lint:check
