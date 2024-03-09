@@ -11,7 +11,7 @@
     "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "prepare": "husky",
     "lint-prettier": "yarn lint:check && yarn prettier:check",
-    "prettier:fix" : "prettier --write ."
+    "prettier:fix": "prettier --write ."
   },
   "author": "Sifat Sayed",
   "license": "ISC",
