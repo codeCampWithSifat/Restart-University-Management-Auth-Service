@@ -7,6 +7,8 @@ import config from '../../config';
 import { IGenericErrorMessage } from '../../interfaces/error';
 import handleValidationError from '../../errors/handleValidationError';
 import ApiError from '../../errors/ApiError';
+import { ZodError } from 'zod';
+import handleZodError from '../../errors/handleZodError';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
@@ -16,7 +18,7 @@ const globalErrorHandler: ErrorRequestHandler = (
 ) => {
   // eslint-disable-next-line no-unused-expressions
   config.env === 'development'
-    ? console.log(`🐱‍🏍 globalErrorHandler ~~`, { error })
+    ? console.log(`🐱‍🏍 globalErrorHandler From Global ~~`, error)
     : console.log(`🐱‍🏍 globalErrorHandler ~~`, error);
 
   let statusCode = 500;
@@ -25,6 +27,11 @@ const globalErrorHandler: ErrorRequestHandler = (
 
   if (error?.name === 'ValidationError') {
     const simpliFiedError = handleValidationError(error);
+    statusCode = simpliFiedError.statusCode;
+    message = simpliFiedError.message;
+    errorMessages = simpliFiedError.errorMessages;
+  } else if (error instanceof ZodError) {
+    const simpliFiedError = handleZodError(error);
     statusCode = simpliFiedError.statusCode;
     message = simpliFiedError.message;
     errorMessages = simpliFiedError.errorMessages;
