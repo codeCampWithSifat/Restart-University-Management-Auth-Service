@@ -1,7 +1,8 @@
-import express, { Application } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
+import httpStatus from 'http-status';
 // import ApiError from './errors/ApiError';
 const app: Application = express();
 
@@ -22,5 +23,20 @@ app.use('/api/v1', routes);
 
 // Global Error Handing
 app.use(globalErrorHandler);
+
+// Not Found Api
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(httpStatus.NOT_FOUND).json({
+    success: false,
+    message: 'Route Not Found',
+    errorMessages: [
+      {
+        path: req.originalUrl,
+        message: 'Something Went Wrong....Coming Soon Later',
+      },
+    ],
+  });
+  next();
+});
 
 export default app;
