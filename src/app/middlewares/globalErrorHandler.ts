@@ -9,6 +9,7 @@ import handleValidationError from '../../errors/handleValidationError';
 import ApiError from '../../errors/ApiError';
 import { ZodError } from 'zod';
 import handleZodError from '../../errors/handleZodError';
+import handleCastError from '../../errors/handleCastError';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
@@ -33,6 +34,10 @@ const globalErrorHandler: ErrorRequestHandler = (
   } else if (error instanceof ZodError) {
     const simpliFiedError = handleZodError(error);
     statusCode = simpliFiedError.statusCode;
+    message = simpliFiedError.message;
+    errorMessages = simpliFiedError.errorMessages;
+  } else if (error?.name === 'CastError') {
+    const simpliFiedError = handleCastError(error);
     message = simpliFiedError.message;
     errorMessages = simpliFiedError.errorMessages;
   } else if (error instanceof Error) {
